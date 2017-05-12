@@ -22,4 +22,4 @@ foreach ($vmrole in $hvclustervmroles)
             $vmdetailhdd +=$vdiskdetail
             }       
     }
-$vmdetailhdd|export-csv C:\consilium\VM_hdd_info.csv -NoTypeInformation
+$vmdetailhdd|export-csv C:\VM_hdd_info.csv -NoTypeInformation
