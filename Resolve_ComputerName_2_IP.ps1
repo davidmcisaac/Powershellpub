@@ -1,5 +1,6 @@
 <#Created by DM 050517
 Resolve_ComputerName_2_IP.ps1 
+Requires AD module to be avaliable. Tested on Windows Server 2012 R2
 #>
 $comp =@();$rep =@();$cp =@()
 $IPNull = "N/A"
