@@ -1,6 +1,18 @@
-<#Created by DM 050517
-Resolve_ComputerName_2_IP.ps1 
-Requires AD module to be avaliable. Tested on Windows Server 2012 R2
+<#PSScriptInfo
+.DESCRIPTION 
+Resolve computer names to IP address.
+.VERSION 1.0
+
+.AUTHOR David McIsaac
+
+.COMPANYNAME 
+
+.COPYRIGHT 2017
+
+.EXTERNALSCRIPTDEPENDENCIES 
+Requires AD module to be avaliable. 
+.RELEASENOTES
+ Tested on Windows Server 2012 R2
 #>
 $comp =@();$rep =@();$cp =@()
 $IPNull = "N/A"

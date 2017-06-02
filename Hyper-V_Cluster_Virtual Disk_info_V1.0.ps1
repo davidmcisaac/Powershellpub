@@ -1,4 +1,20 @@
-#Tested on Windows Server 2012 R2 - Hyper-V Cluster
+<#PSScriptInfo
+.DESCRIPTION 
+ Gather VHD Info on Hyper-V Cluster
+
+.VERSION 1.0
+
+.AUTHOR David McIsaac
+
+.COMPANYNAME 
+
+.COPYRIGHT 2017
+
+.EXTERNALSCRIPTDEPENDENCIES 
+
+.RELEASENOTES
+ Tested on Windows Server 2012 R2 - Hyper-V Cluster
+#>
 $hvcluster = Get-Cluster #obtain cluster name
 $hvclusterhosts = Get-ClusterNode -Cluster $hvcluster.Name #hv hosts for cluster
 $hvclustervmroles = Get-ClusterGroup -Cluster $hvcluster.Name|Where-Object {$_.grouptype -eq "VirtualMachine"}#get cluster roles which are Virtual Machines
