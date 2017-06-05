@@ -15,7 +15,7 @@
 .RELEASENOTES
  
 #>
-$seviceaccountprefix = "sv","sccm","ev","sccm","scsm","sql"
+$seviceaccountprefix = "sv","sccm","sccm","scsm","sql"
 $TodaysDate = Get-Date
 $passwordage = read-host  "Enter Maximum password age i.e. 90, 180 days"
 $TargetDateRange = $TodaysDate.AddDays(-$passwordage)
