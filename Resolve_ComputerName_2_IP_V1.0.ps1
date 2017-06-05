@@ -1,6 +1,6 @@
 <#PSScriptInfo
 .DESCRIPTION 
-Resolve computer names to IP address.
+ Resolve computer names to IP address.
 .VERSION 1.0
 
 .AUTHOR David McIsaac
@@ -10,7 +10,7 @@ Resolve computer names to IP address.
 .COPYRIGHT 2017
 
 .EXTERNALSCRIPTDEPENDENCIES 
-Requires AD module to be avaliable. 
+ Requires AD module to be avaliable. 
 .RELEASENOTES
  Tested on Windows Server 2012 R2
 #>
