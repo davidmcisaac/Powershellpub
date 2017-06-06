@@ -16,24 +16,24 @@
  
 #>
 $seviceaccountprefix = "sv","sccm","sccm","scsm","sql"
-$TodaysDate = Get-Date
+$TodaysDate = Get-Date #Get todays date
 $passwordage = read-host  "Enter Maximum password age i.e. 90, 180 days"
 $TargetDateRange = $TodaysDate.AddDays(-$passwordage)
-$newadaccount =@()
+$newadaccount =@()#Declare empty array
 $adaccount = Get-ADUser -Filter * -Properties samaccountname,LastLogonDate,PasswordLastSet, whencreated |Where-Object {$_.enabled -eq $true -and $_.PasswordLastSet -lt $TargetDateRange} |Sort-Object -Property LastLogonDate -Descending |Select-Object Name, samaccountname, LastLogonDate, PasswordLastSet, Enabled, WhenCreated
 foreach ($u in $adaccount)
-    {
-    $user_is_serviceaccount = 0
+    {#loop through each AD user account
+    $user_is_serviceaccount = 0 #Reset service account counter
     foreach ($sv in $seviceaccountprefix)
             {
-            if ($u.samaccountname -like ($sv+"*"))
+            if ($u.samaccountname -like ($sv+"*"))#Check if samaccountname is like any of the service accounts defined above
                 {
                 write-host "service account detected" $u.samaccountname $sv
                 $user_is_serviceaccount ++
                 }
             }
     if ($user_is_serviceaccount -eq 0)
-        {
+        {#user account isnt a service account add to filtered export list
         $newadaccount += $u
         }
     }

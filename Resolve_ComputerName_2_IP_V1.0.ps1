@@ -14,7 +14,7 @@
 .RELEASENOTES
  Tested on Windows Server 2012 R2
 #>
-$comp =@();$rep =@();$cp =@()
+$comp =@();$rep =@();$cp =@()#Declare empty arrays
 $IPNull = "N/A"
 $PingSuccess ="Online"
 $PingnonSuccess ="Offline"
