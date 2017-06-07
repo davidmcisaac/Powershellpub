@@ -11,6 +11,7 @@
 .COPYRIGHT 2017
 
 .EXTERNALSCRIPTDEPENDENCIES 
+ Tested on Windows Server 2012 and 2012 R2
  Requires AD module to be avaliable. 
 .RELEASENOTES
  
