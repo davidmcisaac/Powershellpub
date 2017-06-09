@@ -15,10 +15,9 @@ Add visual C++ redistributables to MDT deployment share
  Bulk of content from Microsoft from the below URL. Customised for my environment.
  https://docs.microsoft.com/en-us/windows/deployment/deploy-windows-mdt/create-a-windows-10-reference-image
 #>
-
 Import-Module "c:\Program Files\Microsoft Deployment Toolkit\bin\MicrosoftDeploymentToolkit.psd1" #change if MDT not install on C drive
 New-PSDrive -Name "DS001" -PSProvider MDTProvider -Root "d:\deploymentshare"
-New-Item "DS001:\Applications\Microsoft" -ItemType directory
+New-Item "DS001:\Applications\Microsoft" -ItemType directory -ErrorAction SilentlyContinue #Create Microsoft Directory within Applications
 
 $ApplicationName = "Install - Microsoft Visual C++ 2008 SP1 - x86"
 $CommandLine = "vcredist_x86.exe /Q"
@@ -40,14 +39,14 @@ $CommandLine = "vcredist_x64.exe /Q"
 $ApplicationSourcePath = "c:\source\c++\2010"
 Import-MDTApplication -Path "DS001:\Applications\Microsoft" -Enable "True" -Name $ApplicationName -ShortName $ApplicationName -CommandLine $CommandLine -WorkingDirectory ".\Applications\$ApplicationName" -ApplicationSourcePath $ApplicationSourcePath -DestinationFolder $ApplicationName -Verbose
 
-$ApplicationName = "Install - Microsoft Visual C++ 2012 Update 4 - x86"
+$ApplicationName = "Install - Microsoft Visual C++ 2013 - x86"
 $CommandLine = "vcredist_x86.exe /Q"
-$ApplicationSourcePath = "c:\source\c++\2012\"
+$ApplicationSourcePath = "c:\source\c++\2013\"
 Import-MDTApplication -Path "DS001:\Applications\Microsoft" -Enable "True" -Name $ApplicationName -ShortName $ApplicationName -CommandLine $CommandLine -WorkingDirectory ".\Applications\$ApplicationName" -ApplicationSourcePath $ApplicationSourcePath -DestinationFolder $ApplicationName -Verbose
 
-$ApplicationName = "Install - Microsoft Visual C++ 2012 Update 4 - x64"
+$ApplicationName = "Install - Microsoft Visual C++ 2013 - x64"
 $CommandLine = "vcredist_x64.exe /Q"
-$ApplicationSourcePath = "c:\source\c++\2012\"
+$ApplicationSourcePath = "c:\source\c++\2013\"
 Import-MDTApplication -Path "DS001:\Applications\Microsoft" -Enable "True" -Name $ApplicationName -ShortName $ApplicationName -CommandLine $CommandLine -WorkingDirectory ".\Applications\$ApplicationName" -ApplicationSourcePath $ApplicationSourcePath -DestinationFolder $ApplicationName -Verbose
 
 $ApplicationName = "Install - Microsoft Visual C++ 2015 Update 3 - x86"
