@@ -4,5 +4,5 @@ current sets random password length to 12, (second section is for the number of 
 Going to use this code as part of password reset tool for AD users
 #>
 Add-Type -AssemblyName System.web;
-write-host "Choose a password from the below" -ForegroundColor Red
+write-host "Choose a password from the list below" -ForegroundColor red
 1..5|%{ [System.Web.Security.Membership]::GeneratePassword(10,2)}#List 5 passwords to choose from
