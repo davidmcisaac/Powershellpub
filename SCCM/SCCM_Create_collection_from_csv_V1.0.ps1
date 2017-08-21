@@ -15,7 +15,7 @@
  Tested on SCCM 2012 R2
  #Sample CSV file in repository
 #>
-Import-Module "C:\Program Files (x86)\Microsoft Configuration Manager\AdminConsole\bin\ConfigurationManager.psd1" #change path
+Import-Module "$($ENV:SMS_ADMIN_UI_PATH)\..\ConfigurationManager.psd1" # Import the ConfigurationManager.psd1 module 
 $pssccm = @();$sccm_site = @();$computers = @()
 
 $sccm_site = Get-PSDrive|Where-Object {$_.Provider -match 'CMSite'}|select-object Name,sitecode

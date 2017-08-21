@@ -14,7 +14,7 @@ Requires SCCM powershell module
 .RELEASENOTES
  
 #>
-Import-Module "c:\Program Files (x86)\Microsoft Configuration Manager\AdminConsole\bin\ConfigurationManager.psd1" # change path
+Import-Module "$($ENV:SMS_ADMIN_UI_PATH)\..\ConfigurationManager.psd1" # Import the ConfigurationManager.psd1 module 
 $pssccm = @();$sccm_site = @();$apprep=@()
 $sccm_site = Get-PSDrive|Where-Object {$_.Provider -match 'CMSite'}|Select-Object Name,sitecode
 $pssccm = ($sccm_site.Name + ":")
