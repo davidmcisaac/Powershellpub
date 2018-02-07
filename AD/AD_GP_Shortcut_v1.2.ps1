@@ -1,8 +1,8 @@
 <#PSScriptInfo
 .DESCRIPTION 
 Obtain all Group policie objects in domain and check for GPP shortcuts
-.VERSION 1.0
-
+.VERSION 1.2
+Implemented log path variable
 .AUTHOR David McIsaac
 
 .COMPANYNAME 
@@ -14,7 +14,21 @@ Requires AD module to be avaliable.
 .RELEASENOTES
 Tested on Windows Server 2012 and 2012 R2
  Read XML guidance from https://blogs.msdn.microsoft.com/kalleb/2008/07/19/using-powershell-to-read-xml-files/
+
+ .Change log from V1.1 to V1.2
+ Implemented log path variable
 #>
+$logpath = "C:\ADlogs\"
+$createpath = Test-path $logpath
+if ($createpath -eq $true)
+    {
+    write-host "Logs exporting to" $logpath
+    }
+elseif ($createpath -eq $false)
+    {
+    new-item -path $logpath -ItemType Directory
+    write-host "Created log path and exporting to" $logpath
+    }
 $gpoxml=@();$screport=@()#create empty array
 $gpoall = Get-GPO -All|Select-Object DisplayName,ID,DomainName
 $currentdomain = $GPOall[0]|Select-Object Domainname
@@ -31,4 +45,4 @@ foreach ($gpo in $gpoall)
                 }
         }
     }
-$screport|export-csv -NoTypeInformation C:\AD_GP_Shortcut_Report_V1.0.csv
+$screport|export-csv -NoTypeInformation ($logpath + "AD_GP_Shortcut_Report_V1.2.csv")

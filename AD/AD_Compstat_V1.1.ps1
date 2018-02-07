@@ -1,7 +1,7 @@
 <#PSScriptInfo
 .DESCRIPTION 
 Report AD computer Account audit
-.VERSION 1.0
+.VERSION 1.1
 
 .AUTHOR David McIsaac
 
@@ -16,10 +16,22 @@ Report AD computer Account audit
 A bit of help from these posts 
  #ref https://technet.microsoft.com/en-us/library/dd378867(v=ws.10).aspx
  #ref https://blogs.technet.microsoft.com/askds/2009/04/15/the-lastlogontimestamp-attribute-what-it-was-designed-for-and-how-it-works/
-#>
+ .Change Log From V1.0 to V1.1
+  Implemented log path variable
+ #>
+$script:logpath = "C:\ADlogs\"
+$createpath = Test-path $logpath
+if ($createpath -eq $true)
+    {
+    write-host "Logs exporting to" $logpath
+    }
+elseif ($createpath -eq $false)
+    {
+    new-item -path $logpath -ItemType Directory
+    write-host "Created log path and exporting to" $logpath
+    }
 function Get-ADCompstat
 {write-host "Processing..." -ForegroundColor Cyan
-    $logpath = "C:\temp\"
     $script:ADcompReport=@();$script:ADaccounts=@()
     $script:ADaccounts = Get-ADComputer -Filter * -Properties Description,lastLogontimestamp,lastlogondate,Created,OperatingSystem, OperatingSystemServicePack ,IPv4Address |Select-Object Name,Enabled,Description,lastLogontimestamp,lastlogondate,Created,OperatingSystem, OperatingSystemServicePack ,IPv4Address;Write-Host "Number of AD Computer Accounts to Process -"$ADaccounts.count -ForegroundColor yellow
     $ADacountsenabled = $ADaccounts|Where-Object {$_.enabled -eq $true};Write-Host "Number of AD Computer Accounts Enabled -" $ADacountsenabled.count -ForegroundColor Green
@@ -136,8 +148,8 @@ if ($serveros12r2dtc.count -gt 0)
     {
     Write-Host "Number of Windows Server 2012 R2 Datacenter Computers -" $serveros12r2dtc.count
     } 
-    $script:ADcompReport|Sort-Object Name|Export-Csv -NoTypeInformation ($logpath +"ADComputerStatusReport_V1.0.csv")
-    Write-Host "Active Directory computer account status report exported to" ($logpath +"ADComputerStatusReport_V1.0.csv")
+    $script:ADcompReport|Sort-Object Name|Export-Csv -NoTypeInformation ($logpath +"ADComputerStatusReport_V1.1.csv")
+    Write-Host "Active Directory computer account status report exported to" ($logpath +"ADComputerStatusReport_V1.1.csv")
     write-host "End of Script..." -ForegroundColor Cyan
  }
  Get-ADCompstat
